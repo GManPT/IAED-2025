@@ -1,0 +1,19 @@
+CC = gcc
+CFLAGS = -O3 -Wall -Wextra -Werror -Wno-unused-result
+LDFLAGS = -lm
+
+# Detecta automaticamente todos os arquivos .c no diretório
+SOURCES = $(wildcard *.c)
+OBJECTS = $(SOURCES:.c=.o)
+EXECUTABLE = vaccine
+
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJECTS) $(EXECUTABLE)
